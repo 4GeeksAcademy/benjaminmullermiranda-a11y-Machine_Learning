@@ -1,3 +1,14 @@
 __pycache__
 .env
 .learn
+
+# Datos de imágenes (demasiado pesados)
+src/data/raw/cat/
+src/data/raw/dog/
+src/data/raw/dogs-vs-cats/
+src/data/raw/dogs-vs-cats.zip
+src/data/raw/__MACOSX/
+src/data/processed/
+
+# Modelos Keras entrenados (>400MB)
+src/models/*.keras
