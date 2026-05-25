@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resultado – Predictor de Diabetes</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+  <div class="container">
+    <div class="result-card">
+      {% if prediction == 1 %}
+        <span class="result-icon">⚠️</span>
+        <p class="result-title positive">Alto riesgo de diabetes</p>
+        <p class="subtitle">El modelo estima una probabilidad del <strong>{{ probability }}%</strong> de tener diabetes.</p>
+      {% else %}
+        <span class="result-icon">✅</span>
+        <p class="result-title negative">Bajo riesgo de diabetes</p>
+        <p class="subtitle">El modelo estima una probabilidad del <strong>{{ probability }}%</strong> de tener diabetes.</p>
+      {% endif %}
+
+      <div class="prob-bar-wrap">
+        <div class="prob-label">
+          <span>Sin riesgo</span>
+          <span>Alto riesgo</span>
+        </div>
+        <div class="prob-bar">
+          <div class="prob-fill" style="width: {{ probability }}%;"></div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <div class="inputs-summary">
+      <h3>Datos introducidos</h3>
+      <div class="summary-grid">
+        {% for feature, value in user_input.items() %}
+        <div class="summary-item">
+          <span class="s-label">{{ labels[feature] }}</span>
+          <span class="s-value">{{ value }}</span>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div style="text-align:center;">
+      <a class="back-btn" href="/">&larr; Nueva predicción</a>
+    </div>
+
+    <p class="disclaimer">
+      Resultado generado por un modelo Random Forest entrenado con el dataset Pima Indians Diabetes.<br>
+      Este predictor es solo orientativo y no sustituye el diagnóstico médico profesional.
+    </p>
+  </div>
+</body>
+</html>
